@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: sans-serif; background: #f0f4f9; }
+
+        .menu {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .menuitem {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: 0.7s;
+        }
+        .menu.active .menuitem:nth-child(1) {
+            transform: rotate(-45deg) translate(-7px, 7px);
+        }
+        .menu.active .menuitem:nth-child(2) {
+            opacity: 0;
+        }
+        .menu.active .menuitem:nth-child(3) {
+            transform: rotate(45deg) translate(-7px, -7px);
+        }
+
+        .dropdown {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 310px;
+            background: #e1e6e8;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+            transition: opacity 0.3s, transform 0.3s;
+            overflow: auto;
+        }
+        .dropdown.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        /* Top email bar */
+        .dropdown-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #333;
+        }
+        .close-btn {
+            cursor: pointer;
+            font-size: 18px;
+            color: #555;
+            line-height: 1;
+        }
+
+        /* Profile header */
+        .dropdown-header {
+            text-align: center;
+            padding: 10px 16px 20px;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #555;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #fff;
+            font-weight: bold;
+            position: relative;
+        }
+        .avatar-cam {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+        .dropdown-header h3 {
+            font-size: 20px;
+            color: #222;
+            margin-bottom: 4px;
+        }
+        .manage-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 22px;
+            border: 1px solid #bbb;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #1a73e8;
+            cursor: pointer;
+            background: transparent;
+            transition: background 0.2s;
+        }
+        .manage-btn:hover { background: #d0daf5; }
+
+        /* Accounts panel */
+        .dropdown-body {
+            background: #fff;
+            border-radius: 14px;
+            margin: 0 10px 10px;
+            overflow: hidden;
+        }
+        .accounts-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 16px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        .toggle-arrow { font-size: 18px; color: #555; }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            transition: background 0.15s;
+        }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background: #f5f5f5; }
+
+        .item-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .item-label { flex: 1; }
+        .item-badge {
+            font-size: 11px;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        .item-arrow { color: #aaa; font-size: 18px; }
+
+        .dropdown-footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 12px;
+            color: #888;
+        }
+        .dropdown-footer a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 4px;
+        }
+        .dropdown-footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+        <div class="menuitem"></div>
+        <div class="menuitem"></div>
+        <div class="menuitem"></div>
+    </div>
+
+    <div class="dropdown" id="dropdown">
+
+        <!-- Top email bar -->
+        <div class="dropdown-topbar">
+            <span><label for="user"></label></span>
+            <span class="close-btn" id="closeBtn">✕</span>
+        </div>
+
+        <!-- Profile -->
+        <div class="dropdown-header">
+            <div class="avatar">
+                
+                <span class="avatar-cam">📷</span>
+            </div>
+            <h3 id="userName"></h3>
+            <div class="manage-btn">Manage your Account</div>
+        </div>
+
+        <!-- Accounts list -->
+        <div class="dropdown-body">
+            <div class="accounts-toggle">
+                <span>Hide more accounts</span>
+                <span class="toggle-arrow">⌃</span>
+            </div>
+            <a class="dropdown-item" href="#">
+                <div class="item-icon" style="background:#555;">g</div>
+                <span class="item-label">greyish gamer clips</span>
+                <span class="item-badge">Brand account</span>
+            </a>
+            <a class="dropdown-item" href="#">
+                <div class="item-icon" style="background:#444;">a</div>
+                <span class="item-label">allfutbol</span>
+                <span class="item-badge">Brand account</span>
+            </a>
+            <a class="dropdown-item" href="#">
+                <div class="item-icon" style="background:#6c5ce7;">w</div>
+                <span class="item-label">watchful_gamer</span>
+                <span class="item-badge">Brand account</span>
+            </a>
+            <a class="dropdown-item" href="#">
+                <span style="font-size:18px;">👤</span>
+                <span class="item-label">All Brand accounts</span>
+                <span class="item-arrow">›</span>
+            </a>
+            <a class="dropdown-item" href="#">
+                <span style="font-size:18px;">➕</span>
+                <span class="item-label">Add another account</span>
+            </a>
+            <a class="dropdown-item" href="#" style="color:#c00;">
+                <span style="font-size:18px;">↪</span>
+                <span class="item-label">Sign out of all accounts</span>
+            </a>
+        </div>
+
+        <div class="dropdown-footer">
+            <a href="#">Privacy policy</a> · <a href="#">Terms of Service</a>
+        </div>
+    </div>
+
+    <script>
+        const menu = document.querySelector('.menu');
+        const dropdown = document.getElementById('dropdown');
+        const closeBtn = document.getElementById('closeBtn');
+
+        menu.addEventListener('click', function () {
+            this.classList.toggle('active');
+            dropdown.classList.toggle('active');
+        });
+
+        closeBtn.addEventListener('click', function () {
+            menu.classList.remove('active');
+            dropdown.classList.remove('active');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!menu.contains(e.target) && !dropdown.contains(e.target)) {
+                menu.classList.remove('active');
+                dropdown.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoBooks</title>
+    <link rel="stylesheet" href="homepage.css">
+    <script src="https://kit.fontawesome.com/51d2a7ad3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div nav class="topbar">
+      <div class="menu" onclick="toggleMenu(this)">
+        <div class="menuitem" id="menuitem1"></div>
+        <div class="menuitem" id="menuitem2"></div>
+        <div class="menuitem" id="menuitem3"></div>
+      </div>
+
+      
+     <div class="searchbar" id="searchbar">
+        <input type="text" placeholder="Search..." id="searchinput" >
+        <i class="fas fa-search" id="searchicon" onclick="toggleSearch()"></i>
+    </div>
+    <div class="profile-icon" id="profileIcon" onclick="toggleDropdown()">
+        <i class="fas fa-user-circle"></i>
+    </div>
+    </div>
+    
+    
+
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebarheader">
+            <img src="logo.png" alt="Logo" id="logo">
+            <p id="nametext">MIC</p>
+            <h2 id="producttext">AutoBooks</h2>
+        </div>
+        <a href="" id="Dashboard" onclick="dashboard()"><i class="fa-solid fa-tachograph-digital" ></i> Dashboard</a><br>
+        <a href="" id="Inventory" onclick="inventory()"><i class="fa-solid fa-warehouse"></i> Inventory</a><br>
+        <a href="" id="Customer" onclick="customer()"><i class="fas fa-users"></i> Customers</a><br>
+        <a href="" id="Vendors" onclick="vendors()"><i class="fas fa-truck"></i> Vendors</a><br>
+        <a href="" id="Employees" onclick="employees()"><i class="fas fa-user-tie"></i> Employee</a><br>
+        <a href="" id="Trackers" onclick="trackers()"><i class="fas fa-chart-line"></i> Trackers</a><br>
+        <a href="" id="Accounting" onclick="accounting()"><i class="fas fa-calculator"></i> Accounting</a><br>
+        <a href="" id="Reports" onclick="reports()"><i class="fas fa-file-alt"></i> Reports</a><br>
+        <a href="" id="Payroll" onclick="payroll()"><i class="fas fa-money-check-alt"></i> Payroll</a><br>
+        <a href="" id="Documents" onclick="documents()"><i class="fa-regular fa-file"></i> Documents</a><br>
+    </div>
+
+    <script src="homepage.js"></script>
+</body>
+</html> 
