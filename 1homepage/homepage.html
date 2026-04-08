@@ -14,15 +14,33 @@
         <div class="menuitem" id="menuitem2"></div>
         <div class="menuitem" id="menuitem3"></div>
       </div>
-
+    
       
      <div class="searchbar" id="searchbar">
         <input type="text" placeholder="Search..." id="searchinput" >
         <i class="fas fa-search" id="searchicon" onclick="toggleSearch()"></i>
-    </div>
-    <div class="profile-icon" id="profileIcon" onclick="toggleDropdown()">
+     </div>
+     <div class="help">
+        <i class="fas fa-question-circle" id="helpIcon" onclick="toggleHelp()"> Help</i>
+      </div>
+     <div class="profile-icon" id="profileIcon" onclick="toggleDropdown()">
         <i class="fas fa-user-circle"></i>
+     </div>
     </div>
+    <div class="dropdown" id="dropdown">
+        <div>
+            <p id="userrole">Admin</p>
+        </div>
+        <div class="dropdown-topbar">
+            <p>John Doe</p>
+            <i class="fas fa-user-circle"></i>
+        </div>
+        <a href="#">Profile</a>
+        <a href="#">Company</a>
+        <a href="#">Reminders</a>
+        <a href="#">Settings</a>
+        <a href="#">Preferences</a>
+        <a href="#">Logout</a>
     </div>
     
     

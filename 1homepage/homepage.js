@@ -11,3 +11,15 @@ function toggleSearch() {
         input.focus();
     }
 }
+function toggleDropdown() {
+    const dropdown = document.getElementById('dropdown');
+    dropdown.classList.toggle('active');
+}
+
+document.addEventListener('click', function(e) {
+    const icon = document.getElementById('profileIcon');
+    const dropdown = document.getElementById('dropdown');
+    if (!icon.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
+});

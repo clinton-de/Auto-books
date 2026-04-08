@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow: auto;
+    display: flexbox;
+    justify-content: center;
+}
+.card{
+
+}
+.cardcontainer{
+    height: 250px;
+    width:250px;
+    border: 0.7px;
+    border-radius: 10px;
+    box-shadow:3px 3px 5px gainsboro , -3px -3px 5px gainsboro;
+    margin: 20px;
+    margin-left: 300;
+    float:inline-start;
+    
+   
+    
+    
+}
