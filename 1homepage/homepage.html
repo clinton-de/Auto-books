@@ -9,7 +9,7 @@
 </head>
 <body>
     <div nav class="topbar">
-      <div class="menu" onclick="toggleMenu(this)">
+      <div class="menu" onclick="toggleMenu()">
         <div class="menuitem" id="menuitem1"></div>
         <div class="menuitem" id="menuitem2"></div>
         <div class="menuitem" id="menuitem3"></div>
@@ -48,9 +48,13 @@
 
     <div class="sidebar" id="sidebar">
         <div class="sidebarheader">
-            <img src="logo.png" alt="Logo" id="logo">
-            <p id="nametext">MIC</p>
-            <h2 id="producttext">AutoBooks</h2>
+            <div class= "sidebar-brand">
+                <img src="logo.png" alt="Logo" id="logo">
+                    <div class="sidebar-brand-text">
+                        <p id="nametext">MIC</p>
+                        <h2 id="producttext">AutoBooks</h2>
+                     </div>
+            </div>
         </div>
         <a href="" id="Dashboard" onclick="dashboard()"><i class="fa-solid fa-tachograph-digital" ></i> Dashboard</a><br>
         <a href="" id="Inventory" onclick="inventory()"><i class="fa-solid fa-warehouse"></i> Inventory</a><br>
@@ -62,8 +66,11 @@
         <a href="" id="Reports" onclick="reports()"><i class="fas fa-file-alt"></i> Reports</a><br>
         <a href="" id="Payroll" onclick="payroll()"><i class="fas fa-money-check-alt"></i> Payroll</a><br>
         <a href="" id="Documents" onclick="documents()"><i class="fa-regular fa-file"></i> Documents</a><br>
+        <a href="" id="Lists" onclick="lists()"><i class="fas fa-list"></i> Lists</a><br>
     </div>
-
+     <div class="main-content" id="mainContent">
+        <!-- your page content goes here -->
+    </div>
     <script src="homepage.js"></script>
 </body>
 </html> 

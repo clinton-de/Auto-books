@@ -1,7 +1,13 @@
 function toggleMenu() {
     const menu = document.querySelector('.menu');
+    const sidebar = document.getElementById('sidebar');
+    const topbar = document.querySelector('.topbar');
+    const mainContent = document.getElementById('mainContent');
+
     menu.classList.toggle('active');
-    document.querySelector('profile').classList.toggle('active');
+    sidebar.classList.toggle('active');
+    topbar.classList.toggle('active');
+    if (mainContent) mainContent.classList.toggle('active');
 }
 
 function toggleSearch() {
